@@ -8,8 +8,20 @@
     </head>
     <body>
         <header>
-            <h1><a href="{% url 'home' %}">Django Blog Message</a></h1>
+            <div class="nav-left">
+                <h1><a href="{% url 'home' %}">Django Blog Message</a></h1>
+            </div>
+            <div class="nav-right">
+                <h1><a href="{% url 'post_new' %}">+ Add New Posts</a></h1>
+            </div>
         </header>
+        {% if user.is_authenticated %}
+            <h3> Hello {{ user.username}} !</h3>
+            <a href="{% url 'logout' %}">Log Out</a>
+        {% else %}
+            <h3>Your are not logged in </h3>
+            <a href="{% url 'login'%}">Log In </a>
+        {% endif %}
         <div>
             {% block content %}
             {% endblock content%}
